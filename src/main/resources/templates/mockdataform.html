@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ELM Mock Service Data</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+	<style type="text/css">
+textarea {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+</style>
+</head>
+<body>
+	<center>
+		<h2>Mock Data Form</h2>
+		<table>
+			<tbody>
+				<form action="#" th:action="@{/mockservice/updatemockdata}"
+					th:object="${mockDataBean}" method="post">
+					<input type="hidden" th:field="*{mockId}" />
+					<tr>
+						<td><label for="requestData">Request Data</label></td>
+						<td><textarea rows="10" cols="100%" type="textarea" WRAP="off" th:field="*{requestData}"
+							id="requestData" placeholder="Request data" readonly="readonly" /> <span
+							th:if="${#fields.hasErrors('requestData')}"
+							th:errors="*{requestData}">Request data required</span></td>
+					</tr>
+					<tr>
+						<td><label for="responseData">Response Data</label></td>
+						<td><textarea rows="10" cols="100%" type="textarea" th:field="*{responseData}"
+							id="responseData" placeholder="Response data" /> <span
+							th:if="${#fields.hasErrors('responseData')}"
+							th:errors="*{responseData}">Response data required</span></td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2"><input type="submit"
+							value="Update Mock Data">&nbsp;&nbsp;&nbsp;<input type="button"
+							value="Back" onclick="window.history.back();" ></td>	
+					</tr>
+				</form>
+			</tbody>
+		</table>
+	</center>
+</body>
+</html>

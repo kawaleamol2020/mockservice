@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ELM Mock Service Configuration</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script>
+	function editPropertyLevelConfiguration(id) {
+
+		$("#duplicateError").hide();
+		$("#systemError").hide();
+		if ($("#" + id).text() == 'Edit') {
+			$("#" + id).text('Save');
+			$("#text_" + id).hide();
+			$("#input_div_" + id).show();
+			$("#text_mt_" + id).hide();
+			$("#select_div_" + id).show();
+		} else {
+			if ($.trim($("#input_" + id).val()) == '') {
+				$("#error_" + id).show();
+				return;
+			}
+			var propValue = $.trim($("#input_" + id).val());
+			var mockType = $("#select_" + id + " option:selected").val();
+			var propTypeId = $("#proptype_" + id).text();
+			$.ajax({
+				contentType : 'application/json',
+				method : "POST",
+				url : "/mockservice/savePropLvlConfiguration",
+				data : JSON.stringify({
+					"id" : id,
+					"value" : propValue,
+					"mockType" : mockType,
+					"configurationPropertyType" : {
+						"id" : propTypeId
+					}
+				})
+			}).done(function(response) {
+				if (response == 'success')
+					location.reload();
+				else if (response == 'duplicate') {
+					$("#duplicateError").show();
+					return;
+				} else {
+					$("#systemError").show();
+					return;
+				}
+			});
+			/*$("#" + id).text('Edit');
+			$("#text_" + id).show();
+			$("#input_div_" + id).hide();
+			$("#error_" + id).hide();
+			$("#text_mt_" + id).show();
+			$("#select_div_" + id).hide();*/
+		}
+	}
+</script>
+</head>
+<body>
+	<center>
+		<fieldset>
+			<legend>
+				<h1>Global Configuration</h1>
+			</legend>
+			<table>
+				<tbody>
+					<form action="#" th:action="@{/mockservice/configuration}"
+						th:object="${globalConfiguration}" method="post">
+						<tr>
+							<td><label for="endPointURL">End Point URL</label></td>
+							<td><input type="text" th:field="*{endPointURL}"
+								id="endPointURL" placeholder="http://nic.sa/nicservice" /> <span
+								th:if="${#fields.hasErrors('endPointURL')}"
+								th:errors="*{endPointURL}" style="color: red;">End Point
+									URL required</span></td>
+						</tr>
+						<tr>
+							<td><label for="mockType">Mock Type</label></td>
+							<td><select th:field="*{mockType}">
+									<option th:each="type : ${mockTypes}" th:value="${type}"
+										th:text="${type}"></option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><label for="End Point URL">Number Of Rows to
+									Display <span style="font-size: 10px;"><br />Mock Data
+										Screen - Default value 10 rows</span>
+							</label></td>
+							<td><input type="number" step="0"
+								th:field="*{noOfRowsDisplay}" pattern="[0-9]{3}"
+								id="noOfRowsDisplay" placeholder="10" /> <span
+								th:if="${#fields.hasErrors('noOfRowsDisplay')}"
+								th:errors="*{noOfRowsDisplay}">Number of Rows to display
+									required.</span></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><input type="submit"
+								value="Update Configuration"></td>
+						</tr>
+					</form>
+				</tbody>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>
+				<h1>Property Level Configuration</h1>
+			</legend>
+			<table>
+				<tbody>
+					<form action="#"
+						th:action="@{/mockservice/addPropLvlConfiguration}"
+						th:object="${propLevelConfiguration}" method="post">
+						<tr>
+							<td><label>Property Type</label></td>
+							<td><select th:field="*{configurationPropertyType.id}">
+									<option th:each="type : ${propertyTypes}" th:value="${type.id}"
+										th:text="${type.name}"></option>
+							</select></td>
+							<td><label>Value</label></td>
+							<td><input type="text" th:field="*{value}" id="value" /> <span
+								th:if="${#fields.hasErrors('value')}" th:errors="*{value}"
+								style="color: red;">Value required</span></td>
+							<td><label>Mock Type</label></td>
+							<td><select th:field="*{mockType}">
+									<option th:each="type : ${mockTypes}" th:value="${type}"
+										th:text="${type}"></option>
+							</select></td>
+							<td><input type="submit" value="Add Configuration"></td>
+						</tr>
+						<tr>
+							<td colspan="7" th:if="${isDuplicateError}" align="center"
+								style="color: red;">Property configuration already exist</td>
+						</tr>
+					</form>
+				</tbody>
+			</table>
+			<br />
+			<center>
+				<div id="duplicateError" style="color: red; display: none;">Property
+					configuration already exist</div>
+				<div id="systemError" style="color: red; display: none;">System
+					error. Please contact to administrator !!!</div>
+			</center>
+			<br />
+			<table border="1" width="100%">
+				<thead>
+					<tr>
+						<th>Number</th>
+						<th>Property Type</th>
+						<th>Value</th>
+						<th>Mock Type</th>
+						<th>Last Updated Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+					<tr th:each="prop,iterator : ${propertyLevelConfigList}">
+						<td th:text="${iterator.index + 1}">1</td>
+						<td><div th:text="${prop.configurationPropertyType.name}"></div>
+							<div th:id="'proptype_'+${prop.id}"
+								th:text="${prop.configurationPropertyType.id}"
+								style="display: none;"></div></td>
+						<td><div th:id="'text_'+${prop.id}" th:text="${prop.value}"></div>
+							<div style="display: none;" th:id="'input_div_'+${prop.id}">
+								<input type="text" th:value="${prop.value}"
+									th:id="'input_'+${prop.id}" />
+							</div> <span th:id="'error_'+${prop.id}"
+							style="color: red; display: none;">Value required</span></td>
+						<td><div th:text="${prop.mockType}"
+								th:id="'text_mt_'+${prop.id}"></div>
+							<div style="display: none;" th:id="'select_div_'+${prop.id}">
+								<select th:name="'select_'+${prop.id}"
+									th:id="'select_'+${prop.id}">
+									<option th:each="type : ${mockTypes}" th:value="${type}"
+										th:text="${type}" th:selected="${prop.mockType == type}"></option>
+								</select>
+							</div></td>
+						<td
+							th:text="${#dates.format(prop.updatedDate,'dd-MM-yyyy HH:mm:ss')}">Last
+							Updated Date</td>
+						<td><a th:id="${prop.id}"
+							th:href="'javascript:editPropertyLevelConfiguration('+${prop.id}+');'">Edit</a>&nbsp;<a
+							th:href="@{deletePropLvlConfiguration(id=${prop.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</center>
+</body>
+</html>

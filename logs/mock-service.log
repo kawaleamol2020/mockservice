@@ -1,0 +1,56 @@
+2019-11-03 00:01:27.040  INFO 1808 --- [restartedMain] org.aask.MockServiceApplication          : Starting MockServiceApplication on Aprime-PC with PID 1808 (E:\learning2019\MockService\target\classes started by Aprime in E:\learning2019\MockService)
+2019-11-03 00:01:27.071  INFO 1808 --- [restartedMain] org.aask.MockServiceApplication          : The following profiles are active: development
+2019-11-03 00:01:27.647  INFO 1808 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-11-03 00:01:27.648  INFO 1808 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-11-03 00:01:34.798  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-11-03 00:01:34.803  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-03 00:01:36.047  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1204ms. Found 6 repository interfaces.
+2019-11-03 00:01:36.166  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-11-03 00:01:36.170  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-03 00:01:36.229  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.ConfigPropertyTypeRepository.
+2019-11-03 00:01:36.231  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.GlobalConfigurationRepository.
+2019-11-03 00:01:36.233  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.MockRequestRepository.
+2019-11-03 00:01:36.235  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.MockResponseRepository.
+2019-11-03 00:01:36.236  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.MockTypeRepository.
+2019-11-03 00:01:36.243  INFO 1808 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface org.aask.repository.PropertyLevelConfigRepository.
+2019-11-03 00:01:36.244  INFO 1808 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32ms. Found 0 repository interfaces.
+2019-11-03 00:01:39.474  INFO 1808 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d9b5ec3f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-11-03 00:01:43.943  INFO 1808 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1219 (http)
+2019-11-03 00:01:44.137  INFO 1808 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-03 00:01:44.138  INFO 1808 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-11-03 00:01:44.648  INFO 1808 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/mock]   : Initializing Spring embedded WebApplicationContext
+2019-11-03 00:01:44.649  INFO 1808 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 17000 ms
+2019-11-03 00:01:47.700  INFO 1808 --- [restartedMain] o.m.pooled.jms.JmsPoolConnectionFactory  : Provided ConnectionFactory implementation is JMS 2.0+ capable.
+2019-11-03 00:01:50.046  INFO 1808 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-11-03 00:01:51.188  INFO 1808 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-11-03 00:01:51.705  INFO 1808 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-11-03 00:01:52.239  INFO 1808 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.10.Final}
+2019-11-03 00:01:52.245  INFO 1808 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-11-03 00:01:53.296  INFO 1808 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-11-03 00:01:54.804  INFO 1808 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-11-03 00:01:59.603  INFO 1808 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-11-03 00:02:01.255  INFO 1808 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-11-03 00:02:02.798  INFO 1808 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-11-03 00:02:04.830  INFO 1808 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-03 00:02:05.045  WARN 1808 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-03 00:02:05.250  INFO 1808 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-11-03 00:02:09.631  INFO 1808 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-11-03 00:02:10.665  WARN 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Memory Usage for the Broker (1024mb) is more than the maximum available for the JVM: 247 mb - resetting to 70% of maximum available: 173 mb
+2019-11-03 00:02:10.880  INFO 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Using Persistence Adapter: KahaDBPersistenceAdapter[E:\learning2019\MockService\activemq-data\localhost\KahaDB]
+2019-11-03 00:02:11.570  INFO 1808 --- [JMX connector] o.a.a.broker.jmx.ManagementContext       : JMX consoles can connect to service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi
+2019-11-03 00:02:11.683  INFO 1808 --- [KahaDB Index Free Page Recovery] o.a.a.store.kahadb.disk.page.PageFile    : Page File: activemq-data\localhost\KahaDB\db.data. Recovering pageFile free list due to prior unclean shutdown..
+2019-11-03 00:02:11.726  INFO 1808 --- [restartedMain] o.a.a.store.kahadb.MessageDatabase       : KahaDB is version 6
+2019-11-03 00:02:12.263  INFO 1808 --- [restartedMain] o.a.a.store.kahadb.plist.PListStoreImpl  : PListStore:[E:\learning2019\MockService\activemq-data\localhost\tmp_storage] started
+2019-11-03 00:02:12.442  INFO 1808 --- [KahaDB Index Free Page Recovery] o.a.a.store.kahadb.disk.page.PageFile    : Page File: activemq-data\localhost\KahaDB\db.data. Recovered pageFile free list of size: 263
+2019-11-03 00:02:12.675  INFO 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Apache ActiveMQ 5.15.9 (localhost, ID:Aprime-PC-50754-1572728532403-0:1) is starting
+2019-11-03 00:02:12.925  INFO 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Apache ActiveMQ 5.15.9 (localhost, ID:Aprime-PC-50754-1572728532403-0:1) started
+2019-11-03 00:02:12.926  INFO 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : For help or more information please see: http://activemq.apache.org
+2019-11-03 00:02:12.932  WARN 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Store limit is 102400 mb (current store usage is 7 mb). The data directory: E:\learning2019\MockService\activemq-data\localhost\KahaDB only has 27647 mb of usable space. - resetting to maximum available disk space: 27647 mb
+2019-11-03 00:02:12.936  WARN 1808 --- [restartedMain] o.apache.activemq.broker.BrokerService   : Temporary Store limit is 51200 mb (current store usage is 0 mb). The data directory: E:\learning2019\MockService\activemq-data\localhost only has 27640 mb of usable space. - resetting to maximum available disk space: 27640 mb
+2019-11-03 00:02:12.960  INFO 1808 --- [restartedMain] o.a.activemq.broker.TransportConnector   : Connector vm://localhost started
+2019-11-03 00:02:13.470  INFO 1808 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1219 (http) with context path '/mock'
+2019-11-03 00:02:13.484  INFO 1808 --- [restartedMain] org.aask.MockServiceApplication          : Started MockServiceApplication in 50.613 seconds (JVM running for 53.872)
+2019-11-03 00:02:14.202  INFO 1808 --- [restartedMain] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2019-11-03 00:02:14.206  INFO 1808 --- [restartedMain] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library

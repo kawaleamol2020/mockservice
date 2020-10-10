@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ELM Mock Service Data</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<script src="../../js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}" ></script>	
+<style type="text/css">
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    word-break: break-all;
+}
+</style>
+<script type="text/javascript">
+	function toggleSearchForm() {
+
+		$("#requestData").val("");
+		
+		if ($("#searchText").text() == 'Search') {
+			$("#searchForm").show();
+			$("#searchText").text("Hide Search");
+		} else {
+			$("#searchForm").hide();
+			$("#searchText").text("Search");
+		}
+	}
+	function searchMockData(){
+		
+		$("#error").hide();
+		
+		if($("#requestData").val() == ''){
+			$("#searchForm").show();
+			$("#requestDataErr").show();
+			return;
+		} else {
+			$("#requestDataErr").hide();
+			$.ajax({
+				method:"POST",
+				url:"/mockservice/searchmockdata",
+				data: {requestData : $("#requestData").val()}
+			}).done(function(response){
+				var mockData = response;
+				console.log(mockData.mockId);
+				if(mockData.mockId === 'null' || mockData.mockId == 'null' || mockData.mockId === null){
+					$("#error").show();
+				} else {	
+					$("#tbody").text("");
+					$("#tbody").append("<tr><td width=5%>1</td><td id='tdreqdt' width=30%></td><td id='tdresdt' width=50%></td><td id='tderrdt' width=5%></td><td id='lstupddt' width=5%></td><td id='action' width=5%></td> </tr>");
+					$("#tdreqdt").text(mockData.requestData);
+					$("#tdresdt").text(mockData.responseData);
+					$("#derrdt").text(mockData.statusCode);
+					$("#lstupddt").text(mockData.insertedDate);
+					if(parseInt(mockData.statusCode) == 200)
+						$("#action").append('<a href="/mock/mockservice/editMockData?id='+mockData.mockId+'">Edit</a>&nbsp;<a href="/mock/mockservice/deleteMockData?id='+mockData.mockId+'">Delete</a>');
+					else 
+						$("#action").append('<a href="/mock/mockservice/deleteMockData?id='+mockData.mockId+'">Delete</a>');
+				}
+			}) ;
+		}
+	}
+</script>
+</head>
+<body>
+	<center>
+		<h2>Mocked Data</h2>
+		<div align="right">
+			<a href="javascript:toggleSearchForm()" style="text-decoration: none"><span
+				id="searchText">Search</span></a>
+		</div>
+		<div id="searchForm" style="display: none">
+			<table>
+				<tbody>
+					<form action="#" method="post">
+						<tr>
+							<td><label for="requestData">Request Data</label></td>
+							<td><textarea rows="10" cols="100" name="requestData" id="requestData" ></textarea>
+							<span id="requestDataErr" style="display: none;color: red;">Request data required*</span>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2"><input type="button"
+								value="Search" onclick="searchMockData();">&nbsp;&nbsp;&nbsp;<input
+								type="button" value="Hide" onclick="toggleSearchForm();"></td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2">
+							<div id="error" style="display: none;color:red;">Mock data not found for given request</div>
+							</td>
+						</tr>
+					</form>
+				</tbody>
+			</table>
+		</div>
+		<table border="1" width="100%">
+			<thead>
+				<tr>
+					<th>Number</th>
+					<th>Request Data</th>
+					<th>Response Data</th>
+					<th>Response Status Code</th>
+					<th>Last Updated Date</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<tr th:each="md,iterator : ${mockdata}">
+					<td width="5%" th:text="${iterator.index + 1}">1</td>
+					<td width="30%"><pre lang="xml" th:text="${md.requestData}"></pre></td>
+					<td width="50%"><pre lang="xml" th:text="${md.responseData}"></pre></td>
+					<td width="5%" th:text="${md.statusCode}">Response Status Code</td>
+					<td width="5%"
+						th:text="${#dates.format(md.insertedDate,'dd-MM-yyyy HH:mm:ss')}">Last
+						Updated Date</td>
+						
+					<td width="5%"><a th:if="${md.statusCode ==200}" th:href="@{editMockData(id=${md.mockId})}">Edit</a>&nbsp;<a
+						th:href="@{deleteMockData(id=${md.mockId})}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+</body>
+</html>
